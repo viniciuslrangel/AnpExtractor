@@ -37,7 +37,7 @@ func ReportByState(week int, state string, fuelId int, fuelName string) ([][]str
 	nodes = nodes[3:]
 	var output [][]string
 	for _, row := range nodes {
-		col := []string{fuelName, state}
+		col := []string{fuelName, cleanupName(state)}
 		goquery.NewDocumentFromNode(row).ChildrenFiltered("td").Each(func(i int, selection *goquery.Selection) {
 			text := selection.Text()
 			if i > 2 {
@@ -75,7 +75,7 @@ func ReportByCity(week int, cityId int, cityName string, fuelId int, fuelName st
 	nodes = nodes[2:]
 	var output [][]string
 	for _, row := range nodes {
-		col := []string{fuelName, CityByUF[cityName], cityName}
+		col := []string{fuelName, CityByUF[cityName], cleanupName(cityName)}
 		goquery.NewDocumentFromNode(row).ChildrenFiltered("td").Each(func(i int, selection *goquery.Selection) {
 			text := selection.Text()
 			if i == 4 || i == 5 {
